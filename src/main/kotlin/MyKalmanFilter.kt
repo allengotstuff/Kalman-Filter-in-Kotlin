@@ -30,13 +30,14 @@ class MyKalmanFilter {
          * ^X(n+1, n)  = F^X(n,n) +GU(n,n)
          */
         val newX = a.operate(x).add(b.operate(u))
+
         /**
          * Formula 2: Covariance Extrapolation Equation
          * Given the current Covariance P(n), predict the next covariance P(n + 1)
          * P(n+1,n) =FP(n,n)F + Q
          */
         val newP = a.multiply(p).multiply(a.transpose()).add(q)
-        return Pair(newX.copy(), newP.copy())
+        return Pair(newX, newP)
     }
 
     /**
@@ -94,15 +95,17 @@ class MyKalmanFilter {
          */
         val updatedP = p.subtract(K.multiply(h).multiply(p))
 
-        return KalmanUpdateResult(updatedX.copy(), updatedP.copy(), K.copy(), IM.copy(), IS.copy())
+        return KalmanUpdateResult(
+            x = updatedX,
+            p = updatedP,
+            k = K
+        )
     }
 
     // Data class for holding the result of kfUpdate
     data class KalmanUpdateResult(
-        val X: RealVector,
-        val P: RealMatrix,
-        val K: RealMatrix,
-        val IM: RealVector,
-        val IS: RealMatrix
+        val x: RealVector,
+        val p: RealMatrix,
+        val k: RealMatrix
     )
 }
