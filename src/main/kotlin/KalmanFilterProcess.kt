@@ -72,6 +72,10 @@ class KalmanFilterProcess(
         }
     }
 
+    fun debug(): List<DebugStats> {
+        return debugResult
+    }
+
     data class DebugStats(
         val x: RealVector,
         val p: RealMatrix,
