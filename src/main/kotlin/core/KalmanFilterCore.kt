@@ -1,10 +1,10 @@
-package org.example
+package org.example.core
 
 import org.apache.commons.math3.linear.MatrixUtils
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 
-class MyKalmanFilter {
+class KalmanFilterCore {
 
     /**
      * Prediction Step, at step N, predict N + 1

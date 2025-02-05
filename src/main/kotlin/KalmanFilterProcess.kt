@@ -4,6 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix
 import org.apache.commons.math3.linear.ArrayRealVector
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
+import org.example.core.KalmanFilterCore
 
 class KalmanFilterProcess(
     private val debugEnabled: Boolean = false,
@@ -12,7 +13,7 @@ class KalmanFilterProcess(
     private val stateTransitionMatrix: RealMatrix, // A
     private val processMatrix: RealMatrix, // Q
 ) {
-    private val kf: MyKalmanFilter = MyKalmanFilter()
+    private val kf: KalmanFilterCore = KalmanFilterCore()
     private val debugResult = mutableListOf<DebugStats>()
 
     /**
