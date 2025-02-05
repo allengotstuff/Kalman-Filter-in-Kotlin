@@ -1,4 +1,4 @@
-package core
+package org.kalman.core
 
 import org.apache.commons.math3.linear.MatrixUtils
 import org.apache.commons.math3.linear.RealMatrix
