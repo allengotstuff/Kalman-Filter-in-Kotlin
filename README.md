@@ -57,10 +57,10 @@ One of the **most valuable features** of this repository is **calibration suppor
 Using **native Kotlin tools and Kotlin Notebook**, this project enhances the **feedback loop and visualization** for debugging and fine-tuning the Kalman Filter.
 
 ### 🌟 **Key Benefits of the Calibration**  
-✔ Example usage of Kalman filter in smaller dimension, to demystify kalman filter application 
-✔ Interactive debugging with real-time visual feedback.  
-✔ Faster iteration and parameter tuning.  
-✔ Intuitive exploration of system behavior.
+* Example usage of Kalman filter in smaller dimension, to demystify kalman filter application. ✔
+* Interactive debugging with real-time visual feedback. ✔  
+* Faster iteration and parameter tuning. ✔
+* Intuitive exploration of system behavior. ✔
 
 ### 📁  **Kotlin Notebook (`notebook/`)**
 This folder contains **use cases, examples, and calibration tools** for the Kalman Filter. It serves as both:
