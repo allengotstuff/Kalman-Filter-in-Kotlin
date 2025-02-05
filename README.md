@@ -51,7 +51,7 @@ Since **Kotlin lacks built-in matrix and vector operations**, this project uses:
 
 ---
 
-## 🎯 Calibration Guide
+## 📗 Usage & System Calibration
 
 One of the **most valuable features** of this repository is **calibration support**.  
 Using **native Kotlin tools and Kotlin Notebook**, this project enhances the **feedback loop and visualization** for debugging and fine-tuning the Kalman Filter.
