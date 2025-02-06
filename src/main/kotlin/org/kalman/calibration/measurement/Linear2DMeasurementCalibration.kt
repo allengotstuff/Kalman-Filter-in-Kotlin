@@ -15,7 +15,7 @@ class Linear2DMeasurementCalibration : MeasurementCalibration {
         )
     )
 
-    private val NOISE_RANGE = 100.0
+    private val NOISE_RANGE = 5000.0
 
     private val mHiddenStates = mutableListOf<RealVector>()
     private val mMeasuredStates = mutableListOf<RealVector>()
@@ -36,8 +36,8 @@ class Linear2DMeasurementCalibration : MeasurementCalibration {
             val createNewHiddenState = if (hiddenStates.isEmpty()) {
                 START_VALUE
             } else {
-                // y = 25x + 140
-                hiddenStates.last().mapMultiply(25.0).mapAdd(140.0)
+                // y = x + 140
+                hiddenStates.last().mapAdd(140.0)
             }
 
             // create noise/variance for each state
