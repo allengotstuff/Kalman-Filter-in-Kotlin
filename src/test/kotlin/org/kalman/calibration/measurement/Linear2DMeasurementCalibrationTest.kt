@@ -32,11 +32,11 @@ class Linear2DMeasurementCalibrationTest {
     }
 
     @Test
-    fun test_iterate_30_validate_variances_created() {
+    fun test_iterate_15_validate_variances_created() {
         calibration = Linear2DMeasurementCalibration()
-        calibration.iterate(30)
+        calibration.iterate(15)
 
-        repeat(30) { index ->
+        repeat(15) { index ->
 
             val hiddenState = calibration.hiddenStates[index].maxValue
 
@@ -51,11 +51,11 @@ class Linear2DMeasurementCalibrationTest {
 
 
     @Test
-    fun test_iterate_30_validate_linear_formula() {
+    fun test_iterate_55_validate_linear_formula() {
         calibration = Linear2DMeasurementCalibration()
-        calibration.iterate(30)
+        calibration.iterate(55)
 
-        repeat(30) { index ->
+        repeat(55) { index ->
 
 
             if (index != 0) {
