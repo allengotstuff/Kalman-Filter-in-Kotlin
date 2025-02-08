@@ -26,7 +26,7 @@ Problem: GPS signals are often noisy due to atmospheric interference, signal ref
 Mobile Application:
 Apps like Ski Tracks, Strava, and Runkeeper use Kalman filtering to smooth motion tracking and estimate accurate speed and position.
 
-### 🔍 Why This Repository?
+### Why This Repository?
 
 1. **Streamlined Calibration** – Tuning a Kalman Filter requires extensive trial and error. This repository aims to provide **interactive and extendable tools** for calibrating systems modeling.
 2. **Native Kotlin Support** – Unlike other implementations, this repository is built natively in **Kotlin**, offering seamless integration with the Kotlin ecosystem.
@@ -47,10 +47,10 @@ Apps like Ski Tracks, Strava, and Runkeeper use Kalman filtering to smooth motio
 The foundation of the Kalman Filter relies on **matrix and vector operations** for **multidimensional system modeling**. This implementation leverages **third-party libraries** for efficient computation.
 
 Since **Kotlin lacks built-in matrix and vector operations**, this project uses:  
-📌 [Apache Commons Math](https://github.com/apache/commons-math) – A **stable** and well-supported mathematical library.
+[Apache Commons Math](https://github.com/apache/commons-math) – A **stable** and well-supported mathematical library.
 
 
-### 📁  **Kotlin Notebook (`src/notebook/`)**
+### Kotlin Notebook (`src/notebook/`)
 This folder contains **calibrated examples of Kalman Filter for custom systems**. It serves as both:
 - The **practical tutorial** to learn the Kalman Filter with visualization.
 - The **debugging and interactive tool**, allowing developers to refine system parameters for different application use cases.
