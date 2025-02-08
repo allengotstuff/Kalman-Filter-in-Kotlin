@@ -32,9 +32,8 @@ Apps like Ski Tracks, Strava, and Runkeeper use Kalman filtering to smooth motio
 2. **Native Kotlin Support** – Unlike other implementations, this repository is built natively in **Kotlin**, offering seamless integration with the Kotlin ecosystem.
 3. **Enhanced Modeling Flexibility** – Traditional Kalman Filter implementations often assume fixed parameters per iteration. This implementation supports **dynamic covariance updates**, enabling more adaptable system modeling.
 
----
 
-## 💡 In Project Example 
+### In Project Example 
 
 ![2d linear model](/asset/2d_linear_calibration.png)
 
