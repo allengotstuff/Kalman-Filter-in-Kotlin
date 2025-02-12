@@ -14,7 +14,7 @@ import org.kalman.core.KalmanFilterCore
  * 4. Assuming measurement is fully mapped to states
  * 5. Measurement has different covariance between iteration cycle
  */
-class KalmanFilterProcess(
+class SimpleKalmanFilterProcess(
     private val debugEnabled: Boolean = false,
     private var states: RealVector, // X
     private var covarianceMatrix: RealMatrix, // P
