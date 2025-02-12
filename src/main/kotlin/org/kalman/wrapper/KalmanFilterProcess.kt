@@ -46,9 +46,9 @@ class KalmanFilterProcess(
         r: RealMatrix  // measurement covariance,
     ) {
         kf.update(
-            x = states,
+            x = states, // previous state
             y = y,
-            p = covarianceMatrix,
+            p = covarianceMatrix, // previous convariance
             h = Array2DRowRealMatrix(
                 arrayOf(
                     doubleArrayOf(1.0) // assuming the state to measure is 1: 1
