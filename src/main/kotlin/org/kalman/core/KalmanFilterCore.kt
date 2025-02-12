@@ -46,7 +46,7 @@ class KalmanFilterCore {
      * @param x is the vector representation of system states
      * @param y is the measure input vector, representing the measurement of the input
      * @param p is covariance matrix of the current state, representing uncertainty of the state
-     * @param h is the observation matrix, mapping measurement input to states, and visa versa.
+     * @param h is the observation matrix, mapping state input to measurement space.
      * @param r is the measurement covariance, representing the uncertainties of the measurement variable
      */
     fun update(
@@ -57,12 +57,12 @@ class KalmanFilterCore {
         r: RealMatrix
     ): KalmanUpdateResult {
         /**
-         * Part 1: The Mean of predictive distribution of Y within state: mapping X^(n-1) [previously predicted state] into shapes of measure input Y.
+         * Part 1: The predictive measurement: mapping the current state into a measurement space.
          *
          * H(n) * X^(n, n-1)
          *
          */
-        val IM = h.operate(x)
+        val PM = h.operate(x)
 
         /**
          * Part 2:  The dominator of kalman gain: [previous predicted covariance of state] + [current measurement covariance]
@@ -86,7 +86,7 @@ class KalmanFilterCore {
          * X^(n) = X^(n-1) + K(Y - H * X^(n-1))
          *
          */
-        val updatedX = x.add(K.operate(y.subtract(IM)))
+        val updatedX = x.add(K.operate(y.subtract(PM)))
 
         /**
          * Part 5: Updated covariance matrix

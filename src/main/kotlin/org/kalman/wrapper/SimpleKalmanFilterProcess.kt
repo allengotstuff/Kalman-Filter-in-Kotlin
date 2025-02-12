@@ -6,7 +6,15 @@ import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 import org.kalman.core.KalmanFilterCore
 
-class KalmanFilterProcess(
+/**
+ * This is the simplest form of kalman filter process, where:
+ * 1. current state has not effects on the next state
+ * 2. No external control to change state between iteration cycle
+ * 3. Process noise remain constant per iteration.
+ * 4. Assuming measurement is fully mapped to states
+ * 5. Measurement has different covariance between iteration cycle
+ */
+class SimpleKalmanFilterProcess(
     private val debugEnabled: Boolean = false,
     private var states: RealVector, // X
     private var covarianceMatrix: RealMatrix, // P
@@ -25,7 +33,7 @@ class KalmanFilterProcess(
             x = states,
             b = Array2DRowRealMatrix(
                 arrayOf(
-                    doubleArrayOf(0.0) // assuming the input has not effect on states
+                    doubleArrayOf(0.0) // assuming the input has not effects on next states
                 )
             ),
             u = ArrayRealVector(
@@ -46,9 +54,9 @@ class KalmanFilterProcess(
         r: RealMatrix  // measurement covariance,
     ) {
         kf.update(
-            x = states,
+            x = states, // previous state
             y = y,
-            p = covarianceMatrix,
+            p = covarianceMatrix, // previous covariance
             h = Array2DRowRealMatrix(
                 arrayOf(
                     doubleArrayOf(1.0) // assuming the state to measure is 1: 1
