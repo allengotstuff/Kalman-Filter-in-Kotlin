@@ -25,7 +25,7 @@ class KalmanFilterProcess(
             x = states,
             b = Array2DRowRealMatrix(
                 arrayOf(
-                    doubleArrayOf(0.0) // assuming the input has not effect on states
+                    doubleArrayOf(0.0) // assuming the input has not effects on next states
                 )
             ),
             u = ArrayRealVector(
@@ -48,7 +48,7 @@ class KalmanFilterProcess(
         kf.update(
             x = states, // previous state
             y = y,
-            p = covarianceMatrix, // previous convariance
+            p = covarianceMatrix, // previous covariance
             h = Array2DRowRealMatrix(
                 arrayOf(
                     doubleArrayOf(1.0) // assuming the state to measure is 1: 1
