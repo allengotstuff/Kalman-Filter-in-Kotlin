@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.0.20"
 }
 
-group = "org.kalmanfilter"
+group = "org.kalmanfilter.utility"
 version = "1.0-SNAPSHOT"
 
 repositories {
