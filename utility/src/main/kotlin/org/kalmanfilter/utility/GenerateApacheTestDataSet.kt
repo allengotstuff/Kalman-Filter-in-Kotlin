@@ -54,8 +54,8 @@ class GeneratedApacheDataSet(
             kalmanFilter.predict()
             kalmanFilter.correct(measurement)
             // Store copies of the current state estimation vector and error covariance matrix.
-            stateEstimations.add(kalmanFilter.stateEstimationVector)
-            errorCovariances.add(kalmanFilter.errorCovarianceMatrix)
+            stateEstimations.add(kalmanFilter.stateEstimationVector.copy())
+            errorCovariances.add(kalmanFilter.errorCovarianceMatrix.copy())
         }
     }
 
