@@ -1,9 +1,9 @@
 package org.kalman.wrapper
 
-import org.apache.commons.math3.linear.Array2DRowRealMatrix
 import org.apache.commons.math3.linear.ArrayRealVector
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
+import org.apache.commons.math3.linear.MatrixUtils
 import org.kalman.core.KalmanFilterCore
 
 /**
@@ -25,22 +25,17 @@ class SimpleKalmanFilterProcess(
     private val debugResult = mutableListOf<DebugStats>()
 
     /**
-     * Assume that there are not controllable variable during input
+     * Assume that there are not controllable variable during input, so make them 0 instead.
      */
-    fun predict() {
+    fun predict(
+        controlMatrix: RealMatrix = MatrixUtils.createRealMatrix(states.dimension, states.dimension),
+        controlVector: RealVector = ArrayRealVector(states.dimension)
+    ) {
         kf.predict(
             a = stateTransitionMatrix,
             x = states,
-            b = Array2DRowRealMatrix(
-                arrayOf(
-                    doubleArrayOf(0.0) // assuming the input has not effects on next states
-                )
-            ),
-            u = ArrayRealVector(
-                doubleArrayOf(
-                    0.0
-                )
-            ),
+            b = controlMatrix,
+            u = controlVector,
             p = covarianceMatrix,
             q = processMatrix
         ).let { result ->
@@ -49,19 +44,19 @@ class SimpleKalmanFilterProcess(
         }
     }
 
+    /**
+     * Assume that measurement to state is identical map
+     */
     fun update(
         y: RealVector, // measurement vector
-        r: RealMatrix  // measurement covariance,
+        r: RealMatrix,  // measurement covariance
+        measureMatrix: RealMatrix = MatrixUtils.createRealIdentityMatrix(y.dimension)
     ) {
         kf.update(
             x = states, // previous state
             y = y,
             p = covarianceMatrix, // previous covariance
-            h = Array2DRowRealMatrix(
-                arrayOf(
-                    doubleArrayOf(1.0) // assuming the state to measure is 1: 1
-                )
-            ),
+            h = measureMatrix,
             r = r
         ).let { result ->
             states = result.x
