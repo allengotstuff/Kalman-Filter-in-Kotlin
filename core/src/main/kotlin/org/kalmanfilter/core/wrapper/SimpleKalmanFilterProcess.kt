@@ -1,10 +1,10 @@
-package org.kalman.wrapper
+package org.kalmanfilter.core.wrapper
 
 import org.apache.commons.math3.linear.ArrayRealVector
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 import org.apache.commons.math3.linear.MatrixUtils
-import org.kalman.core.KalmanFilterCore
+import org.kalmanfilter.core.KalmanFilterCore
 
 /**
  * This is the simplest form of kalman filter process, where:
