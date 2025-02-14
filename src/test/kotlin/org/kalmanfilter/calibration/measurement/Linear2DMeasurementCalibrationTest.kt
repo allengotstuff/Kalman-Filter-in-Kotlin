@@ -1,4 +1,4 @@
-package org.kalman.calibration.measurement
+package org.kalmanfilter.calibration.measurement
 
 import org.junit.jupiter.api.Assertions.*
 
