@@ -1,13 +1,20 @@
-package org.kalman.core
+package org.kalmanfilter
 
 import org.apache.commons.math3.linear.ArrayRealVector
 import org.apache.commons.math3.linear.MatrixUtils
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 import org.junit.jupiter.api.Test
+import org.kalmanfilter.core.KalmanFilterCore
 import org.kalmanfilter.utility.GeneratedApacheDataSet
 import kotlin.test.assertEquals
 
+/**
+ * This is the main test cross validation KalmanFilterCore Implementation with Apache:common:math. Given
+ * the same params input, both model should produce identical outputs of dataset.
+ *
+ * This test was keep in the main src test folder to keep :core module clean
+ */
 class KalmanFilterCoreTest{
 
    @Test
