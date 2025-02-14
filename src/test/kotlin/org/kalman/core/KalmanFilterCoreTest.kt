@@ -95,7 +95,7 @@ class KalmanFilterCoreTest{
        assertEquals(stateEstimations.toString(), dataset.stateEstimations.toString())
 
        assert(errorCovariances.size == dataset.errorCovariances.size)
-       assertEquals(errorCovariances.toString(), dataset.errorCovariances.toString())
+       assertEquals(errorCovariances.toString() +"  ", dataset.errorCovariances.toString())
     }
 
 }
