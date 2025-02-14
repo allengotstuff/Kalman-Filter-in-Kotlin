@@ -4,7 +4,13 @@ import org.apache.commons.math3.linear.MatrixUtils
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 import org.apache.commons.math3.linear.ArrayRealVector
+import java.io.File
 
+/**
+ * This file is generate output of estimate and covariance to file, and cross-reference to own implementation.
+ *
+ * TODO(convert output to json format, so this result validation can be applied)
+ */
 fun main() {
     // State
     val stateTransition: RealMatrix = MatrixUtils.createRealIdentityMatrix(3)
@@ -56,4 +62,14 @@ fun main() {
 
     println("\nError Covariances:")
     println(dataset.errorCovariances)
+
+    val output = File("./test-data/output.txt")
+    output.writeText(
+        """
+            {
+                   state: ${dataset.stateEstimations},
+                   covariance: ${dataset.errorCovariances}
+            }
+        """.trimIndent()
+    )
 }
