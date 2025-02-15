@@ -65,10 +65,10 @@ This graph highlights the effectiveness of the Kalman Filter in handling noisy d
 ### This project is best developed using ![IntelliJ IDEA](https://img.shields.io/badge/IDE-IntelliJ%20IDEA-blue?style=flat&logo=intellij-idea)
 
 
-### **Package Overview**
-- **`org.kalman.core`** – The fundamental Kalman Filter implementation, designed with **detailed documentation** explaining its inner workings. This package offers **maximum flexibility** for system modeling and can be extended as needed.
-- **`org.kalman.wrapper`** – Higher-level abstraction that wraps around `org.kalman.core` for common use cases on application layer.
-- **`org.kalman.calibration`** - Extendable and reusable artificial datasets of system, in the purpose of streamline custom model calibration.
+### **Module Overview**
+- **`:core`** – The fundamental Kalman Filter implementation, designed with **detailed documentation** explaining its inner workings. This package offers **maximum flexibility** for system modeling and can be extended as needed. It will be packaged for distribution.
+- **`:utility`** – Provides utility functions for testing, debugging, and calibrating both **KalmanFilterCore** and its application use cases
+- **`:src`** - Contains examples demonstrating the usage of the Kalman Filter.
 
 
 ### Matrices and Vectors
