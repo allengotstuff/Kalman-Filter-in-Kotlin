@@ -6,7 +6,7 @@ import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
 import org.junit.jupiter.api.Test
 import org.kalmanfilter.core.KalmanFilterCore
-import org.kalmanfilter.utility.GeneratedApacheDataSet
+import org.kalmanfilter.utility.validation.GeneratedApacheDataSet
 import kotlin.test.assertEquals
 
 /**
