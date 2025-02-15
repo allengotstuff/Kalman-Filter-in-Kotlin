@@ -1,4 +1,4 @@
-package org.kalmanfilter.utility
+package org.kalmanfilter.utility.validation
 
 import org.apache.commons.math3.filter.KalmanFilter
 import org.apache.commons.math3.filter.DefaultProcessModel
