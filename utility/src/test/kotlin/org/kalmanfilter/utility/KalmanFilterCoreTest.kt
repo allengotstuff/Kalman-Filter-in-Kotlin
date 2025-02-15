@@ -1,4 +1,4 @@
-package org.kalmanfilter
+package org.kalmanfilter.utility
 
 import org.apache.commons.math3.linear.ArrayRealVector
 import org.apache.commons.math3.linear.MatrixUtils

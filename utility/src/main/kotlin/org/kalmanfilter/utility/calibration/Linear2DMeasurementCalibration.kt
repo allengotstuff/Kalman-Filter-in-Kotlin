@@ -1,4 +1,4 @@
-package org.kalmanfilter.calibration.measurement
+package org.kalmanfilter.utility.calibration
 
 import org.apache.commons.math3.linear.RealMatrix
 import org.apache.commons.math3.linear.RealVector
