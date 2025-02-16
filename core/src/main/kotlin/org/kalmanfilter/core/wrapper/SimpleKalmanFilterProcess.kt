@@ -20,8 +20,9 @@ class SimpleKalmanFilterProcess(
     private var covarianceMatrix: RealMatrix, // P
     private val stateTransitionMatrix: RealMatrix, // A
     private val processMatrix: RealMatrix, // Q
-) {
     private val kf: KalmanFilterCore = KalmanFilterCore()
+) {
+
     private val debugResult = mutableListOf<DebugStats>()
 
     /**
