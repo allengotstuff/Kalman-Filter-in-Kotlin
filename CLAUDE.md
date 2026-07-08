@@ -27,7 +27,7 @@ Multi-module Gradle project (Kotlin 2.0.20). Matrix/vector math comes from Apach
 
 ### Validation strategy
 
-Correctness of `KalmanFilterCore` is established by cross-validation against Apache Commons Math's reference `KalmanFilter`: `utility/src/test/.../KalmanFilterCoreTest` runs both implementations over identical inputs and asserts identical state estimates and covariances. When changing the core equations, this test is the ground truth. It lives in `:utility` (not `:core`) deliberately, to keep `:core` free of the Apache filter dependency surface.
+Correctness of `KalmanFilterCore` is established by cross-validation against Apache Commons Math's reference `KalmanFilter`: `utility/src/test/.../KalmanFilterCoreTest` runs both implementations over identical inputs and asserts identical state estimates and covariances. When changing the core equations, this test is the ground truth. It lives in `:utility` (not `:core`) because it depends on `:utility`'s `GeneratedApacheDataSet`, and `:core` depending on `:utility` would be circular.
 
 ## Conventions
 
