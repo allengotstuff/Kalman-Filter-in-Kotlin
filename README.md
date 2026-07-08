@@ -6,7 +6,7 @@ A **Kalman Filter** implementation in **Kotlin**, designed with built-in support
 
 This repository is actively under development, and its API, architecture, or functionality may change frequently. **Backward compatibility is not guaranteed**, and breaking changes may occur without prior notice.
 
-If you're using this project, following closely with development updates. **Contributions and feedback are welcome!**
+If you're using this project, follow development updates closely. **Contributions and feedback are welcome!**
 
 ## 📌 What is Kalman Filter?
 
@@ -60,15 +60,81 @@ This graph highlights the effectiveness of the Kalman Filter in handling noisy d
 
 
 ---
+## 🚀 Quick Start
+
+The core API is `KalmanFilterCore`, a **stateless** implementation: `predict()` and `update()` take all model matrices per call, so any of them (including covariances) can change between iterations.
+
+```kotlin
+val kf = KalmanFilterCore()
+
+// Predict: state x and covariance p extrapolated one step forward
+val (predictedX, predictedP) = kf.predict(
+    a = stateTransitionMatrix,  // A: how state evolves per cycle
+    x = states,                 // X: current state vector
+    b = controlMatrix,          // B: how control input affects state
+    u = controlVector,          // U: control input
+    p = covarianceMatrix,       // P: state uncertainty
+    q = processNoiseMatrix      // Q: process noise
+)
+
+// Update: correct the prediction with a measurement
+val result = kf.update(
+    x = predictedX,
+    y = measurementVector,      // Y: the noisy measurement
+    p = predictedP,
+    h = observationMatrix,      // H: maps state to measurement space
+    r = measurementCovariance   // R: measurement uncertainty
+)
+// result.x = updated state, result.p = updated covariance, result.k = Kalman gain
+```
+
+For simple systems, `SimpleKalmanFilterProcess` wraps the core and carries state across iterations. It assumes no control input and an identity measurement mapping by default, and can record per-iteration internals (state, covariance, Kalman gain, measurement) for debugging:
+
+```kotlin
+val process = SimpleKalmanFilterProcess(
+    debugEnabled = true,
+    states = initialState,
+    covarianceMatrix = initialCovariance,
+    stateTransitionMatrix = stateTransition,
+    processMatrix = processNoise
+)
+
+measurements.forEach { (y, r) ->
+    process.predict()
+    process.update(y = y, r = r) // measurement covariance can differ per iteration
+}
+val stats = process.debug() // inspect x/P/K/y for each update
+```
+
+Matrices and vectors use Apache Commons Math types (`RealMatrix`, `RealVector`).
+
+---
 ## 📖 Development Guide
 
 ### This project is best developed using ![IntelliJ IDEA](https://img.shields.io/badge/IDE-IntelliJ%20IDEA-blue?style=flat&logo=intellij-idea)
 
+### Build & Test
+
+Requires **JDK 17** (resolved automatically via the Gradle toolchain plugin).
+
+```bash
+./gradlew build          # compile and test all modules
+./gradlew test           # run all tests (same as CI)
+./gradlew :core:test     # run tests for a single module
+```
+
+CI (GitHub Actions) runs `./gradlew test` on every push and pull request to `main`.
 
 ### **Module Overview**
-- **`:core`** – The fundamental Kalman Filter implementation, designed with **detailed documentation** explaining its inner workings. This package offers **maximum flexibility** for system modeling and can be extended as needed. It will be packaged for distribution.
-- **`:utility`** – Provides utility functions for testing, debugging, and calibrating both **KalmanFilterCore** and its application use cases
-- **`:src`** - Contains examples demonstrating the usage of the Kalman Filter.
+- **`:core`** – The fundamental Kalman Filter implementation, designed with **detailed documentation** explaining its inner workings. This package offers **maximum flexibility** for system modeling and can be extended as needed. It will be packaged for distribution. Includes the `wrapper` package (`SimpleKalmanFilterProcess`) for common simplified use cases.
+- **`:utility`** – Provides utility functions for testing, debugging, and calibrating both **KalmanFilterCore** and its application use cases:
+  - `calibration` – generates synthetic datasets (true hidden states, noisy measurements, and per-step measurement covariances) for tuning filter parameters.
+  - `validation` – wraps Apache Commons Math's reference `KalmanFilter` to produce comparison datasets.
+- **Root `src/`** – Contains Kotlin Notebook examples demonstrating usage of the Kalman Filter (not a Gradle module).
+
+### Validation Strategy
+
+Correctness of `KalmanFilterCore` is verified by **cross-validation against Apache Commons Math's reference `KalmanFilter`**: given identical inputs, both implementations must produce identical state estimates and covariances (see `KalmanFilterCoreTest` in `:utility`). When modifying the core equations, this test is the ground truth.
 
 
 ### Matrices and Vectors
@@ -90,7 +156,7 @@ This is one of the core features of the repository, providing **interactive debu
 #### Best Practices: 
 * Each Notebook file should focus on a single, unique system to serve as a clear example for developers, making it easier to find the relevant use case.
 * Notebook files should follow clean code practices and include clear documentation.
-* Custom classes and components used in a Notebook should be unit tested, or have unit tests added in `src/test`.
+* Custom classes and components used in a Notebook should be unit tested, with unit tests added in the owning module (`core/src/test` or `utility/src/test`).
 * Notebook filenames should follow the convention: `{system_modeling}_calibration.ipynb` (e.g., `linear_2d_calibration.ipynb`).
 ---
 
